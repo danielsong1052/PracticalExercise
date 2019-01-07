@@ -1,0 +1,79 @@
+<div class="jumbotron">
+  <div class="container">
+    <h2 class="underlineHover"><strong>Detail Inquiry</strong></h2> 
+    <div class="mt-3">
+      <table>
+        <thead>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Comments</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ inquiryService.inquiry.firstName }}</td>
+            <td>{{ inquiryService.inquiry.lastName }}</td>
+            <td>{{ inquiryService.inquiry.email }}</td>
+            <td>{{ inquiryService.inquiry.comments }}</td>            
+          </tr>
+        </tbody>
+      </table>
+
+    <h3 class="mt-5">Recommendations</h3>
+    <table>
+      <thead>
+        <th>Category</th>
+        <th>Comments</th>
+        <th>Created Date</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recommendation of recommendations">
+          <td>{{recommendation.category}}</td>
+          <td>{{recommendation.comments}}</td>
+          <td>{{recommendation.createdDate}}</td>
+        </tr>
+      </tbody>
+    </table> 
+    
+    <form id="recommendation" (ngSubmit)="onSubmitRecommendation()">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Recommendation
+            </mat-panel-title>
+            <mat-panel-description>
+              Type Category & Comments
+            </mat-panel-description>
+          </mat-expansion-panel-header>         
+
+          <mat-form-field class="member-40-width pr-2">  
+            <input type="text" placeholder="Category" matInput 
+            [(ngModel)]="recommendation.category" name="category" [matAutocomplete]="category">
+            <mat-autocomplete #category="matAutocomplete">
+              <mat-option *ngFor="let category of categories" [value]="category.categoryName">
+                {{category.categoryName}}
+              </mat-option>
+            </mat-autocomplete>
+  
+          </mat-form-field>
+
+          <mat-form-field class="member-60-width">
+            <input matInput 
+              placeholder="Comments (Must be 50 characters or less)" maxlength="50" 
+              [(ngModel)]="recommendation.comments" id="comments" name="comments">
+          </mat-form-field>
+
+        </mat-expansion-panel>            
+      </mat-accordion>
+
+      <div class="mt-1">        
+        <button type="button" id="inquiryList" class="btn btn-primary float-right mt-1 mr-1" [routerLink]="['/inquiry']">Inquiry List</button>
+        <input mdbBtn type="submit" color="primary" class="btn btn-primary float-right mt-1 mr-1" value="Add Recommendation">       
+      </div>
+
+    </form>
+    
+
+  </div>
+</div>

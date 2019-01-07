@@ -1,0 +1,55 @@
+<div class="jumbotron">
+  <div class="container">
+    <h2 class="underlineHover"><strong>Inquiry</strong></h2>
+
+    <form #inquiryForm="ngForm" (ngSubmit)="onSubmit(inquiryForm)">
+      <div class="form-group">
+        <div class="input-field ml-5 mr-5">
+            <label for="name" class="float-left">First Name</label>
+            <input type="text" class="form-control" [(ngModel)]="inquiry.firstName" id="firstName" name="firstName">          
+        </div>         
+      </div><br>
+      <div class="form-group">
+        <div class="input-field ml-5 mr-5">
+            <label for="name" class="float-left">Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]="inquiry.lastName" id="lastName" name="lastName">          
+        </div>         
+      </div><br>
+      <div class="form-group">
+        <div class="input-field ml-5 mr-5">
+            <label for="email" class="float-left">Email(<span class="required-mark">*</span>)</label>
+            <input class="form-control"
+              [(ngModel)]="inquiry.email" placeholder="ex) abc@abc.com" required [pattern]="emailPattern" #checkEmail="ngModel"
+              id="email" name="email">   
+            <div *ngIf="checkEmail.errors && inquiryForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+              <div *ngIf="checkEmail.errors.required">
+                <span class="warning">Email required</span>
+              </div>
+              <div *ngIf="checkEmail.errors.pattern">
+                <span class="warning">Email not valid</span>
+              </div>
+            </div>
+        </div>         
+      </div><br>
+      <div class="form-group">
+        <div class="input-field ml-5 mr-5">
+          <label for="comments" class="float-left">Comments(<span class="required-mark">*</span>)</label>
+          <textarea class="form-control" 
+            [(ngModel)]="inquiry.comments" placeholder="Must be 150 characters or less" required #checkComments="ngModel"
+            maxlength="150" id="comments" name="comments"></textarea>
+          <span id="counter" class="mt-1 float-left">###</span> 
+          <div *ngIf="checkComments.errors && inquiryForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+            <div *ngIf="checkComments.errors.required">
+              <span class="warning">Comments required</span>
+            </div>            
+          </div>   
+        </div>
+      </div><br>   
+      
+      <button type="button" id="inquiryList" class="btn btn-primary float-right mt-3 mr-5" [routerLink]="['/inquiry']">Inquiry List</button>
+      <input mdbBtn type="submit" color="primary" class="btn btn-primary float-right mt-3 mr-1" value="Add Comments">      
+    </form>
+    
+  </div>
+</div>
+
