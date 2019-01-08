@@ -1,5 +1,5 @@
 # PracticalExercise
-This is the Practical Exercise.
+This is the Practical Exercise using Angular 6 and Java.
 
 ## How to run
 - Database : run Mysql
